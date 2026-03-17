@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Appeal — HELB Smart System</title>
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--green:#1a7a3c;--green-dark:#0f5228;--green-light:#e8f5ee;--gold:#f0a500;--red:#c0392b;--text:#1a1a1a;--text-light:#555;--border:#dde5e0;--bg:#f5f7f5;--white:#ffffff;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);}
+.top-strip{background:var(--green-dark);color:#fff;font-size:.75em;padding:6px 0;text-align:center;}
+header{background:var(--white);border-bottom:3px solid var(--green);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:80px;box-shadow:0 2px 8px rgba(0,0,0,.08);}
+.logo-area{display:flex;align-items:center;gap:16px;}
+.logo-badge{width:56px;height:56px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1.1em;}
+.logo-text h1{font-size:1.3em;font-weight:700;color:var(--green-dark);}
+.logo-text p{font-size:.72em;color:var(--text-light);}
+nav{background:var(--green);padding:0 40px;display:flex;}
+nav a{color:rgba(255,255,255,.88);text-decoration:none;font-size:.85em;font-weight:500;padding:14px 20px;display:block;transition:background .2s;border-bottom:3px solid transparent;}
+nav a:hover,nav a.active{background:var(--green-dark);color:#fff;border-bottom-color:var(--gold);}
+.page-header{background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;padding:32px 40px;}
+.page-header h2{font-size:1.6em;font-weight:700;margin-bottom:6px;}
+.page-header p{opacity:.85;font-size:.9em;}
+.wrap{max-width:900px;margin:40px auto;padding:0 24px 60px;}
+.form-card{background:var(--white);border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.08);overflow:hidden;}
+.form-section{padding:28px 32px;border-bottom:1px solid var(--border);}
+.form-section:last-child{border-bottom:none;}
+.form-section-title{font-size:1em;font-weight:700;color:var(--green-dark);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.form-section-title span{background:var(--green);color:#fff;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8em;font-weight:700;flex-shrink:0;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.form-group{display:flex;flex-direction:column;gap:6px;}
+.form-group.full{grid-column:1/-1;}
+label{font-size:.82em;font-weight:600;color:var(--text-light);}
+input,select,textarea{padding:10px 14px;border:1.5px solid var(--border);border-radius:4px;font-size:.9em;font-family:'Inter',sans-serif;color:var(--text);background:#fff;transition:border-color .2s;}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(26,122,60,.1);}
+.submit-area{padding:24px 32px;background:var(--green-light);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.btn-submit{background:var(--green);color:#fff;border:none;padding:14px 36px;border-radius:4px;font-size:1em;font-weight:700;cursor:pointer;transition:background .2s;}
+.btn-submit:hover{background:var(--green-dark);}
+.btn-submit:disabled{background:#aaa;cursor:not-allowed;}
+.submit-note{font-size:.8em;color:var(--text-light);}
+.error-box{background:#fdf0f0;border-left:4px solid var(--red);padding:14px 18px;border-radius:0 4px 4px 0;color:#7a1a1a;font-size:.88em;margin-top:16px;}
+.site-footer{background:var(--green-dark);color:rgba(255,255,255,.7);padding:20px 40px;}
+.footer-bottom-bar{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;font-size:.78em;flex-wrap:wrap;gap:8px;}
+@media(max-width:700px){.form-grid{grid-template-columns:1fr;}}
+    </style>
+</head>
+<body>
+<div class="top-strip">Official Website of the Higher Education Loans Board (HELB) — Republic of Kenya</div>
+<header>
+    <div class="logo-area">
+        <div class="logo-badge">HELB</div>
+        <div class="logo-text"><h1>Higher Education Loans Board</h1><p>Empowering Students Through Education Financing — Est. 1995</p></div>
+    </div>
+</header>
+<nav>
+    <a href="index.html">Home</a>
+    <a href="apply.html">Apply for Funding</a>
+    <a href="result.html">Check Result</a>
+    <a href="appeal.html" class="active">Submit Appeal</a>
+    <a href="dashboard.html">Admin Dashboard</a>
+</nav>
+<div class="page-header">
+    <h2>Submit a Band Appeal</h2>
+    <p>If you believe your band placement does not reflect your financial situation, submit a formal appeal below.</p>
+</div>
+
+<div class="wrap">
+    <div class="form-card">
+        <div class="form-section">
+            <div class="form-section-title"><span>!</span> Before You Appeal</div>
+            <div style="background:#fff8e1;border-left:4px solid #f0a500;padding:14px 18px;border-radius:0 4px 4px 0;font-size:.88em;line-height:1.7;color:#5a4000;">
+                <strong>Appeals must be submitted within 30 days of band placement.</strong><br>
+                Provide your Application ID and a clear explanation of why you believe your band is incorrect.
+                Supporting documents (income certificates, death certificates, disability cards) strengthen your case.
+                Appeals are reviewed within <strong>14 working days</strong>.
+            </div>
+        </div>
+
+        <form id="appealForm">
+            <div class="form-section">
+                <div class="form-section-title"><span>1</span> Appeal Details</div>
+                <div class="form-grid">
+                    <div class="form-group"><label>Application ID *</label><input type="number" name="application_id" id="appId" required placeholder="e.g. 42"></div>
+                    <div class="form-group"><label>Current Band (as assigned)</label>
+                        <select name="current_band">
+                            <option value="1">Band 1</option><option value="2">Band 2</option>
+                            <option value="3">Band 3</option><option value="4">Band 4</option><option value="5">Band 5</option>
+                        </select>
+                    </div>
+                    <div class="form-group full">
+                        <label>Reason for Appeal *</label>
+                        <textarea name="reason" rows="5" required placeholder="Explain clearly why you believe your band placement is incorrect. Include specific factors such as income changes, additional dependents, or circumstances not captured in your original application."></textarea>
+                    </div>
+                    <div class="form-group full">
+                        <label>Supporting Documents (list document names)</label>
+                        <textarea name="supporting_docs" rows="3" placeholder="e.g. KRA income certificate, death certificate of parent, NCPWD disability card, bank statements"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="submit-area">
+                <div class="submit-note">Appeals are reviewed by the HELB Assessment Committee within 14 working days.</div>
+                <button type="submit" class="btn-submit" id="appealBtn">Submit Appeal →</button>
+            </div>
+        </form>
+
+        <div id="appealResult" style="display:none;padding:24px 32px;"></div>
+    </div>
+</div>
+
+<footer class="site-footer">
+    <div class="footer-bottom-bar">
+        <span>© 2026 Higher Education Loans Board — Republic of Kenya</span>
+        <span>Smart Enterprise System v1.0 | Cyber Titans — Kisii University</span>
+    </div>
+</footer>
+
+<script>
+const API = 'http://127.0.0.1:5000';
+
+// Pre-fill ID from URL param
+const params = new URLSearchParams(window.location.search);
+if (params.get('id')) document.getElementById('appId').value = params.get('id');
+
+document.getElementById('appealForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('appealBtn');
+    btn.disabled = true; btn.textContent = 'Submitting...';
+    const fd = new FormData(e.target);
+    const data = Object.fromEntries(fd.entries());
+    const result = document.getElementById('appealResult');
+    result.style.display = 'block';
+    try {
+        const res  = await fetch(`${API}/api/appeal`, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)});
+        const json = await res.json();
+        if (!json.success) throw new Error(json.error);
+        result.innerHTML = `
+            <div style="background:#e8f5ee;border-left:4px solid #1a7a3c;padding:16px 20px;border-radius:0 4px 4px 0;color:#0f5228;">
+                <strong>✅ Appeal Submitted Successfully</strong><br><br>
+                Appeal ID: <strong>#${json.appeal_id}</strong><br>
+                ${json.message}
+            </div>`;
+        e.target.reset();
+    } catch(err) {
+        result.innerHTML = `<div class="error-box"><strong>Error:</strong> ${err.message}</div>`;
+    }
+    btn.disabled = false; btn.textContent = 'Submit Appeal →';
+});
+</script>
+</body>
+</html>
