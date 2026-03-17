@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit Appeal — HELB Smart System</title>
+    <title>Apply for Funding — HELB Smart System</title>
     <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -33,6 +33,9 @@ nav a:hover,nav a.active{background:var(--green-dark);color:#fff;border-bottom-c
 label{font-size:.82em;font-weight:600;color:var(--text-light);}
 input,select,textarea{padding:10px 14px;border:1.5px solid var(--border);border-radius:4px;font-size:.9em;font-family:'Inter',sans-serif;color:var(--text);background:#fff;transition:border-color .2s;}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(26,122,60,.1);}
+.checkbox-row{display:flex;align-items:center;gap:10px;padding:8px 0;}
+.checkbox-row input[type=checkbox]{width:18px;height:18px;accent-color:var(--green);}
+.checkbox-row label{font-size:.88em;font-weight:500;color:var(--text);cursor:pointer;}
 .submit-area{padding:24px 32px;background:var(--green-light);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
 .btn-submit{background:var(--green);color:#fff;border:none;padding:14px 36px;border-radius:4px;font-size:1em;font-weight:700;cursor:pointer;transition:background .2s;}
 .btn-submit:hover{background:var(--green-dark);}
@@ -54,60 +57,188 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green);b
 </header>
 <nav>
     <a href="index.html">Home</a>
-    <a href="apply.html">Apply for Funding</a>
+    <a href="apply.html" class="active">Apply for Funding</a>
     <a href="result.html">Check Result</a>
-    <a href="appeal.html" class="active">Submit Appeal</a>
+    <a href="appeal.html">Submit Appeal</a>
     <a href="dashboard.html">Admin Dashboard</a>
 </nav>
 <div class="page-header">
-    <h2>Submit a Band Appeal</h2>
-    <p>If you believe your band placement does not reflect your financial situation, submit a formal appeal below.</p>
+    <h2>Apply for HELB Funding</h2>
+    <p>Complete all sections accurately. Your band allocation is determined by a fairness-aware AI model.</p>
 </div>
-
 <div class="wrap">
-    <div class="form-card">
-        <div class="form-section">
-            <div class="form-section-title"><span>!</span> Before You Appeal</div>
-            <div style="background:#fff8e1;border-left:4px solid #f0a500;padding:14px 18px;border-radius:0 4px 4px 0;font-size:.88em;line-height:1.7;color:#5a4000;">
-                <strong>Appeals must be submitted within 30 days of band placement.</strong><br>
-                Provide your Application ID and a clear explanation of why you believe your band is incorrect.
-                Supporting documents (income certificates, death certificates, disability cards) strengthen your case.
-                Appeals are reviewed within <strong>14 working days</strong>.
+<form id="applyForm">
+<div class="form-card">
+    <div class="form-section">
+        <div class="form-section-title"><span>1</span> Personal Information</div>
+        <div class="form-grid">
+            <div class="form-group full">
+                <label>Full Name *</label>
+                <input type="text" name="full_name" required placeholder="As per National ID">
+            </div>
+            <div class="form-group">
+                <label>National ID / Passport Number *</label>
+                <input type="text" name="id_number" required placeholder="e.g. 12345678">
+            </div>
+            <div class="form-group">
+                <label>Date of Birth *</label>
+                <input type="date" name="date_of_birth" required>
+            </div>
+            <div class="form-group">
+                <label>Gender *</label>
+                <select name="gender" required>
+                    <option value="">Select</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Phone Number *</label>
+                <input type="tel" name="phone" required placeholder="07XXXXXXXX">
+            </div>
+            <div class="form-group full">
+                <label>Email Address *</label>
+                <input type="email" name="email" required placeholder="student@example.com">
             </div>
         </div>
-
-        <form id="appealForm">
-            <div class="form-section">
-                <div class="form-section-title"><span>1</span> Appeal Details</div>
-                <div class="form-grid">
-                    <div class="form-group"><label>Application ID *</label><input type="number" name="application_id" id="appId" required placeholder="e.g. 42"></div>
-                    <div class="form-group"><label>Current Band (as assigned)</label>
-                        <select name="current_band">
-                            <option value="1">Band 1</option><option value="2">Band 2</option>
-                            <option value="3">Band 3</option><option value="4">Band 4</option><option value="5">Band 5</option>
-                        </select>
-                    </div>
-                    <div class="form-group full">
-                        <label>Reason for Appeal *</label>
-                        <textarea name="reason" rows="5" required placeholder="Explain clearly why you believe your band placement is incorrect. Include specific factors such as income changes, additional dependents, or circumstances not captured in your original application."></textarea>
-                    </div>
-                    <div class="form-group full">
-                        <label>Supporting Documents (list document names)</label>
-                        <textarea name="supporting_docs" rows="3" placeholder="e.g. KRA income certificate, death certificate of parent, NCPWD disability card, bank statements"></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <div class="submit-area">
-                <div class="submit-note">Appeals are reviewed by the HELB Assessment Committee within 14 working days.</div>
-                <button type="submit" class="btn-submit" id="appealBtn">Submit Appeal →</button>
-            </div>
-        </form>
-
-        <div id="appealResult" style="display:none;padding:24px 32px;"></div>
     </div>
-</div>
+    <div class="form-section">
+        <div class="form-section-title"><span>2</span> Academic Information</div>
+        <div class="form-grid">
+            <div class="form-group full">
+                <label>Institution Name *</label>
+                <input type="text" name="institution" required placeholder="e.g. Kisii University">
+            </div>
+            <div class="form-group">
+                <label>School Type *</label>
+                <select name="school_type" required>
+                    <option value="">Select</option>
+                    <option value="public_university">Public University</option>
+                    <option value="private_university">Private University</option>
+                    <option value="tvet">TVET / Technical College</option>
+                    <option value="national_polytechnic">National Polytechnic</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Course / Programme *</label>
+                <input type="text" name="course" required placeholder="e.g. BSc Computer Science">
+            </div>
+            <div class="form-group">
+                <label>Year of Study *</label>
+                <select name="year_of_study" required>
+                    <option value="">Select</option>
+                    <option value="1">Year 1</option>
+                    <option value="2">Year 2</option>
+                    <option value="3">Year 3</option>
+                    <option value="4">Year 4</option>
+                    <option value="5">Year 5</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Annual Tuition Fees (KES) *</label>
+                <input type="number" name="annual_fees" required placeholder="e.g. 80000" min="0">
+            </div>
+        </div>
+    </div>
 
+    <div class="form-section">
+        <div class="form-section-title"><span>3</span> Household Financial Information</div>
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Annual Household Income (KES) *</label>
+                <input type="number" name="household_income" required placeholder="e.g. 240000" min="0">
+            </div>
+            <div class="form-group">
+                <label>Number of Dependants *</label>
+                <input type="number" name="dependants" required placeholder="e.g. 4" min="0" max="20">
+            </div>
+            <div class="form-group">
+                <label>Parent/Guardian Employment Status *</label>
+                <select name="employment_status" required>
+                    <option value="">Select</option>
+                    <option value="employed_formal">Employed (Formal Sector)</option>
+                    <option value="employed_informal">Employed (Informal / Casual)</option>
+                    <option value="self_employed">Self-Employed / Business</option>
+                    <option value="unemployed">Unemployed</option>
+                    <option value="deceased">Deceased / Orphan</option>
+                    <option value="retired">Retired</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Region / County *</label>
+                <select name="region" required>
+                    <option value="">Select</option>
+                    <option value="nairobi">Nairobi</option>
+                    <option value="central">Central</option>
+                    <option value="coast">Coast</option>
+                    <option value="eastern">Eastern</option>
+                    <option value="north_eastern">North Eastern</option>
+                    <option value="nyanza">Nyanza</option>
+                    <option value="rift_valley">Rift Valley</option>
+                    <option value="western">Western</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Residence Type *</label>
+                <select name="residence_type" required>
+                    <option value="">Select</option>
+                    <option value="urban">Urban</option>
+                    <option value="peri_urban">Peri-Urban</option>
+                    <option value="rural">Rural</option>
+                    <option value="arid_semi_arid">Arid / Semi-Arid</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Household Assets Value (KES)</label>
+                <input type="number" name="assets_value" placeholder="Estimated value of land, property" min="0">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-section">
+        <div class="form-section-title"><span>4</span> Vulnerability &amp; Special Circumstances</div>
+        <div class="form-group full" style="padding:0 0 8px">
+            <div class="checkbox-row">
+                <input type="checkbox" name="is_orphan" id="orphan" value="1">
+                <label for="orphan">I am an orphan (both parents deceased)</label>
+            </div>
+            <div class="checkbox-row">
+                <input type="checkbox" name="has_disability" id="disability" value="1">
+                <label for="disability">I have a registered disability (NCPWD card holder)</label>
+            </div>
+            <div class="checkbox-row">
+                <input type="checkbox" name="is_single_parent_household" id="singleparent" value="1">
+                <label for="singleparent">I come from a single-parent household</label>
+            </div>
+            <div class="checkbox-row">
+                <input type="checkbox" name="sibling_in_university" id="sibling" value="1">
+                <label for="sibling">I have a sibling currently enrolled in university / college</label>
+            </div>
+        </div>
+        <div class="form-group full">
+            <label>Additional Circumstances (optional)</label>
+            <textarea name="additional_info" rows="3" placeholder="Any other relevant information..."></textarea>
+        </div>
+    </div>
+    <div class="form-section">
+        <div class="form-section-title"><span>5</span> Declaration</div>
+        <div style="background:#fff8e1;border-left:4px solid var(--gold);padding:14px 18px;border-radius:0 4px 4px 0;font-size:.85em;line-height:1.7;color:#5a4000;margin-bottom:16px;">
+            I declare that the information provided is true and accurate. I understand that providing false information is an offence under the HELB Act.
+        </div>
+        <div class="checkbox-row">
+            <input type="checkbox" name="declaration" id="declaration" required value="1">
+            <label for="declaration">I agree to the above declaration and consent to HELB processing my data. *</label>
+        </div>
+    </div>
+    <div class="submit-area">
+        <div class="submit-note">Processing takes 2-5 seconds. Your band result will be shown immediately.</div>
+        <button type="submit" class="btn-submit" id="submitBtn">Submit Application</button>
+    </div>
+    <div id="formResult" style="display:none;padding:24px 32px;"></div>
+</div>
+</form>
+</div>
 <footer class="site-footer">
     <div class="footer-bottom-bar">
         <span>© 2026 Higher Education Loans Board — Republic of Kenya</span>
@@ -117,34 +248,43 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green);b
 
 <script>
 const API = 'http://127.0.0.1:5000';
-
-// Pre-fill ID from URL param
-const params = new URLSearchParams(window.location.search);
-if (params.get('id')) document.getElementById('appId').value = params.get('id');
-
-document.getElementById('appealForm').addEventListener('submit', async (e) => {
+document.getElementById('applyForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-    const btn = document.getElementById('appealBtn');
-    btn.disabled = true; btn.textContent = 'Submitting...';
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true; btn.textContent = 'Processing...';
     const fd = new FormData(e.target);
-    const data = Object.fromEntries(fd.entries());
-    const result = document.getElementById('appealResult');
-    result.style.display = 'block';
+    const data = {};
+    for (const [k, v] of fd.entries()) data[k] = v;
+    ['is_orphan','has_disability','is_single_parent_household','sibling_in_university'].forEach(k => { if (!data[k]) data[k] = 0; });
+    const resultDiv = document.getElementById('formResult');
+    resultDiv.style.display = 'block';
+    resultDiv.innerHTML = '<div style="text-align:center;padding:20px;color:#1a7a3c;font-weight:600;">Submitting your application...</div>';
     try {
-        const res  = await fetch(`${API}/api/appeal`, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)});
+        const res  = await fetch(`${API}/api/apply`, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)});
         const json = await res.json();
-        if (!json.success) throw new Error(json.error);
-        result.innerHTML = `
-            <div style="background:#e8f5ee;border-left:4px solid #1a7a3c;padding:16px 20px;border-radius:0 4px 4px 0;color:#0f5228;">
-                <strong>✅ Appeal Submitted Successfully</strong><br><br>
-                Appeal ID: <strong>#${json.appeal_id}</strong><br>
-                ${json.message}
+        if (!json.success) throw new Error(json.error || 'Submission failed');
+        const bandColors = {1:'#1a7a3c',2:'#2e9e52',3:'#f0a500',4:'#d45f00',5:'#c0392b'};
+        const col = bandColors[json.assigned_band] || '#1a7a3c';
+        resultDiv.innerHTML = `
+            <div style="background:#e8f5ee;border-left:4px solid #1a7a3c;padding:20px 24px;border-radius:0 4px 4px 0;">
+                <div style="font-size:1.1em;font-weight:700;color:#0f5228;margin-bottom:12px;">Application Submitted Successfully</div>
+                <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+                    <div style="background:${col};color:#fff;padding:16px 28px;border-radius:6px;text-align:center;">
+                        <div style="font-size:2.5em;font-weight:900;line-height:1">Band ${json.assigned_band}</div>
+                        <div style="font-size:.75em;opacity:.9;margin-top:4px">Your Allocation Band</div>
+                    </div>
+                    <div>
+                        <div style="font-size:.85em;color:#555;margin-bottom:6px">Application ID: <strong style="color:#0f5228">#${json.application_id}</strong></div>
+                        <div style="font-size:.85em;color:#555;margin-bottom:6px">Fairness Score: <strong style="color:#0f5228">${parseFloat(json.adjusted_score||0).toFixed(1)}/100</strong></div>
+                        <a href="result.html?id=${json.application_id}" style="display:inline-block;margin-top:8px;background:#1a7a3c;color:#fff;padding:8px 20px;border-radius:4px;text-decoration:none;font-size:.85em;font-weight:600;">View Full Result</a>
+                    </div>
+                </div>
             </div>`;
         e.target.reset();
     } catch(err) {
-        result.innerHTML = `<div class="error-box"><strong>Error:</strong> ${err.message}</div>`;
+        resultDiv.innerHTML = `<div class="error-box"><strong>Error:</strong> ${err.message}<br><small>Make sure the API is running: python api.py</small></div>`;
     }
-    btn.disabled = false; btn.textContent = 'Submit Appeal →';
+    btn.disabled = false; btn.textContent = 'Submit Application';
 });
 </script>
 </body>
