@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HELB — Higher Education Loans Board Kenya</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --green:      #1a7a3c;
+            --green-dark: #0f5228;
+            --green-light:#e8f5ee;
+            --gold:       #f0a500;
+            --red:        #c0392b;
+            --text:       #1a1a1a;
+            --text-light: #555;
+            --border:     #dde5e0;
+            --bg:         #f5f7f5;
+            --white:      #ffffff;
+        }
+
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); }
+
+        /* ── TOP STRIP ── */
+        .top-strip {
+            background: var(--green-dark);
+            color: #fff;
+            font-size: 0.75em;
+            padding: 6px 0;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+
+        /* ── HEADER ── */
+        header {
+            background: var(--white);
+            border-bottom: 3px solid var(--green);
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .logo-area { display: flex; align-items: center; gap: 16px; }
+
+        .logo-badge {
+            width: 56px; height: 56px;
+            background: var(--green);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-weight: 700; font-size: 1.1em; letter-spacing: 1px;
+        }
+
+        .logo-text h1 { font-size: 1.3em; font-weight: 700; color: var(--green-dark); }
+        .logo-text p  { font-size: 0.72em; color: var(--text-light); letter-spacing: 0.3px; }
+
+        .header-right { display: flex; align-items: center; gap: 12px; }
+
+        .btn-portal {
+            background: var(--green);
+            color: #fff;
+            padding: 10px 22px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.85em;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .btn-portal:hover { background: var(--green-dark); }
+
+        .btn-outline-sm {
+            border: 1.5px solid var(--green);
+            color: var(--green);
+            padding: 9px 18px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.85em;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .btn-outline-sm:hover { background: var(--green); color: #fff; }
+
+        /* ── NAV ── */
+        nav {
+            background: var(--green);
+            padding: 0 40px;
+            display: flex;
+            gap: 0;
+        }
+
+        nav a {
+            color: rgba(255,255,255,0.88);
+            text-decoration: none;
+            font-size: 0.85em;
+            font-weight: 500;
+            padding: 14px 20px;
+            display: block;
+            transition: background 0.2s, color 0.2s;
+            border-bottom: 3px solid transparent;
+        }
+
+        nav a:hover, nav a.active {
+            background: var(--green-dark);
+            color: #fff;
+            border-bottom-color: var(--gold);
+        }
+
+        /* ── HERO BANNER ── */
+        .hero {
+            background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 100%);
+            color: #fff;
+            padding: 60px 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .hero h2 {
+            font-size: 2.2em;
+            font-weight: 700;
+            line-height: 1.25;
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            font-size: 1em;
+            opacity: 0.88;
+            line-height: 1.7;
+            margin-bottom: 28px;
+        }
+
+        .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+        .btn-white {
+            background: #fff;
+            color: var(--green-dark);
+            padding: 13px 28px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9em;
+            transition: all 0.2s;
+        }
+        .btn-white:hover { background: var(--gold); color: #fff; }
+
+        .btn-gold {
+            background: var(--gold);
+            color: #fff;
+            padding: 13px 28px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9em;
+            transition: all 0.2s;
+        }
+        .btn-gold:hover { background: #d4920a; }
+
+        /* Hero stats */
+        .hero-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .hero-stat {
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .hero-stat .num {
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--gold);
+            display: block;
+        }
+
+        .hero-stat .lbl {
+            font-size: 0.78em;
+            opacity: 0.85;
+            margin-top: 4px;
+        }
+
+        /* ── MAIN CONTENT ── */
+        .main { max-width: 1200px; margin: 0 auto; padding: 48px 40px; }
+
+        /* Band cards */
+        .section-title {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: var(--green-dark);
+            margin-bottom: 8px;
+        }
+
+        .section-sub {
+            color: var(--text-light);
+            font-size: 0.9em;
+            margin-bottom: 28px;
+        }
+
+        .bands-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-bottom: 56px;
+        }
+
+        .band-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .band-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
+
+        .band-header {
+            padding: 16px;
+            color: #fff;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+
+        .band-body {
+            background: #fff;
+            padding: 16px;
+            font-size: 0.82em;
+        }
+
+        .band-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .band-row:last-child { border-bottom: none; }
+        .band-row .key { color: var(--text-light); }
+        .band-row .val { font-weight: 600; color: var(--green-dark); }
+
+        /* Quick links */
+        .quick-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 56px;
+        }
+
+        .quick-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 28px 24px;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border-top: 4px solid var(--green);
+        }
+
+        .quick-card:hover {
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            border-top-color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .quick-icon { font-size: 2em; }
+        .quick-card h3 { font-size: 1em; font-weight: 700; color: var(--green-dark); }
+        .quick-card p  { font-size: 0.85em; color: var(--text-light); line-height: 1.5; }
+
+        /* Notice banner */
+        .notice {
+            background: #fff8e1;
+            border: 1px solid #f0a500;
+            border-left: 4px solid #f0a500;
+            border-radius: 4px;
+            padding: 16px 20px;
+            margin-bottom: 40px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .notice-icon { font-size: 1.3em; flex-shrink: 0; }
+        .notice p { font-size: 0.88em; color: #5a4000; line-height: 1.6; }
+        .notice strong { color: #3a2800; }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--green-dark);
+            color: rgba(255,255,255,0.8);
+            padding: 40px;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+
+        .footer-col h4 {
+            color: #fff;
+            font-size: 0.9em;
+            font-weight: 700;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .footer-col p, .footer-col a {
+            font-size: 0.82em;
+            line-height: 2;
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            display: block;
+        }
+
+        .footer-col a:hover { color: var(--gold); }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.78em;
+            color: rgba(255,255,255,0.5);
+        }
+
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; }
+            .bands-grid { grid-template-columns: repeat(2, 1fr); }
+            .quick-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            header { padding: 0 16px; }
+            nav { padding: 0 16px; overflow-x: auto; }
+            .main { padding: 32px 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-strip">
+        Official Website of the Higher Education Loans Board (HELB) — Republic of Kenya
+    </div>
+
+    <header>
+        <div class="logo-area">
+            <div class="logo-badge">HELB</div>
+            <div class="logo-text">
+                <h1>Higher Education Loans Board</h1>
+                <p>Empowering Students Through Education Financing — Est. 1995</p>
+            </div>
+        </div>
+        <div class="header-right">
+            <a href="apply.html" class="btn-outline-sm">Apply Now</a>
+            <a href="dashboard.html" class="btn-portal">Admin Portal</a>
+        </div>
+    </header>
+
+    <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="apply.html">Apply for Funding</a>
+        <a href="result.html">Check Result</a>
+        <a href="appeal.html">Submit Appeal</a>
+        <a href="dashboard.html">Admin Dashboard</a>
+        <a href="#about">About HELB</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div>
+            <h2>Smart, Fair &amp; Transparent<br>Student Funding Allocation</h2>
+            <p>
+                The HELB Smart Enterprise System uses an intelligent, data-driven scoring model
+                to allocate funding bands fairly — incorporating income, dependents, regional
+                vulnerability, disability and fee burden into a transparent, explainable decision.
+            </p>
+            <div class="hero-btns">
+                <a href="apply.html" class="btn-white">Apply for Funding</a>
+                <a href="result.html" class="btn-gold">Check Your Band</a>
+            </div>
+        </div>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <span class="num">300K+</span>
+                <span class="lbl">Applications Processed</span>
+            </div>
+            <div class="hero-stat">
+                <span class="num">5</span>
+                <span class="lbl">Funding Bands</span>
+            </div>
+            <div class="hero-stat">
+                <span class="num">85%+</span>
+                <span class="lbl">Allocation Accuracy</span>
+            </div>
+            <div class="hero-stat">
+                <span class="num">100%</span>
+                <span class="lbl">Transparent Scoring</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="main">
+
+        <!-- NOTICE -->
+        <div class="notice">
+            <div class="notice-icon">📢</div>
+            <p>
+                <strong>2026 Funding Applications Now Open.</strong>
+                The Smart HELB System now provides full explanations for every band placement.
+                Apply online, receive your band result instantly, and understand exactly how your
+                score was calculated. Appeals can be submitted within 30 days of placement.
+            </p>
+        </div>
+
+        <!-- BANDS -->
+        <div class="section-title">Funding Band Structure</div>
+        <p class="section-sub">Students are placed in one of five bands based on socio-economic assessment.</p>
+
+        <div class="bands-grid">
+            <div class="band-card">
+                <div class="band-header" style="background:#1a7a3c">Band 1</div>
+                <div class="band-body">
+                    <div class="band-row"><span class="key">Scholarship</span><span class="val">80%</span></div>
+                    <div class="band-row"><span class="key">HELB Loan</span><span class="val">15%</span></div>
+                    <div class="band-row"><span class="key">Household</span><span class="val">5%</span></div>
+                    <div class="band-row"><span class="key">Eligibility</span><span class="val">Most Vulnerable</span></div>
+                </div>
+            </div>
+            <div class="band-card">
+                <div class="band-header" style="background:#2e9e52">Band 2</div>
+                <div class="band-body">
+                    <div class="band-row"><span class="key">Scholarship</span><span class="val">60%</span></div>
+                    <div class="band-row"><span class="key">HELB Loan</span><span class="val">25%</span></div>
+                    <div class="band-row"><span class="key">Household</span><span class="val">15%</span></div>
+                    <div class="band-row"><span class="key">Eligibility</span><span class="val">Highly Needy</span></div>
+                </div>
+            </div>
+            <div class="band-card">
+                <div class="band-header" style="background:#f0a500">Band 3</div>
+                <div class="band-body">
+                    <div class="band-row"><span class="key">Scholarship</span><span class="val">40%</span></div>
+                    <div class="band-row"><span class="key">HELB Loan</span><span class="val">35%</span></div>
+                    <div class="band-row"><span class="key">Household</span><span class="val">25%</span></div>
+                    <div class="band-row"><span class="key">Eligibility</span><span class="val">Moderate Need</span></div>
+                </div>
+            </div>
+            <div class="band-card">
+                <div class="band-header" style="background:#d45f00">Band 4</div>
+                <div class="band-body">
+                    <div class="band-row"><span class="key">Scholarship</span><span class="val">20%</span></div>
+                    <div class="band-row"><span class="key">HELB Loan</span><span class="val">40%</span></div>
+                    <div class="band-row"><span class="key">Household</span><span class="val">40%</span></div>
+                    <div class="band-row"><span class="key">Eligibility</span><span class="val">Low Need</span></div>
+                </div>
+            </div>
+            <div class="band-card">
+                <div class="band-header" style="background:#c0392b">Band 5</div>
+                <div class="band-body">
+                    <div class="band-row"><span class="key">Scholarship</span><span class="val">0%</span></div>
+                    <div class="band-row"><span class="key">HELB Loan</span><span class="val">30%</span></div>
+                    <div class="band-row"><span class="key">Household</span><span class="val">70%</span></div>
+                    <div class="band-row"><span class="key">Eligibility</span><span class="val">Financially Stable</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- QUICK LINKS -->
+        <div class="section-title">Quick Access</div>
+        <p class="section-sub">Everything you need in one place.</p>
+
+        <div class="quick-grid">
+            <a href="apply.html" class="quick-card">
+                <div class="quick-icon">📝</div>
+                <h3>Apply for Funding</h3>
+                <p>Submit your socio-economic details and receive an instant, transparent band placement with full explanation.</p>
+            </a>
+            <a href="result.html" class="quick-card">
+                <div class="quick-icon">🔍</div>
+                <h3>Check Your Result</h3>
+                <p>Enter your application ID to view your band, score breakdown, and the factors that influenced your placement.</p>
+            </a>
+            <a href="appeal.html" class="quick-card">
+                <div class="quick-icon">⚖️</div>
+                <h3>Submit an Appeal</h3>
+                <p>Disagree with your band? Submit a formal appeal with supporting documents for review within 14 working days.</p>
+            </a>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Higher Education Loans Board</h4>
+                <p>HELB House, Upper Hill, Nairobi</p>
+                <p>P.O. Box 69489 – 00400, Nairobi</p>
+                <p>Tel: +254 711 052 000</p>
+                <p>Email: info@helb.co.ke</p>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <a href="apply.html">Apply for Funding</a>
+                <a href="result.html">Check Band Result</a>
+                <a href="appeal.html">Submit Appeal</a>
+                <a href="dashboard.html">Admin Dashboard</a>
+            </div>
+            <div class="footer-col">
+                <h4>Information</h4>
+                <a href="#">Band Structure</a>
+                <a href="#">Eligibility Criteria</a>
+                <a href="#">Scoring Framework</a>
+                <a href="#">FAQs</a>
+            </div>
+            <div class="footer-col">
+                <h4>Government Links</h4>
+                <a href="#">Ministry of Education</a>
+                <a href="#">Kenya Revenue Authority</a>
+                <a href="#">Commission for University Education</a>
+                <a href="#">Kenya.go.ke</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 Higher Education Loans Board — Republic of Kenya</span>
+            <span>Smart Enterprise System v1.0 | Cyber Titans — Kisii University</span>
+        </div>
+    </footer>
+
+</body>
+</html>

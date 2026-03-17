@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard — HELB Smart System</title>
+    <link rel="stylesheet" href="helb.css">
+</head>
+<body>
+<div class="top-strip">HELB Smart System — Admin Portal | Restricted Access</div>
+<header>
+    <div class="logo-area">
+        <div class="logo-badge">HELB</div>
+        <div class="logo-text"><h1>Higher Education Loans Board</h1><p>Admin Dashboard — Smart Allocation System</p></div>
+    </div>
+    <a href="index.html" style="font-size:.85em;color:var(--green);text-decoration:none;font-weight:600;">← Public Portal</a>
+</header>
+<nav>
+    <a href="index.html">Home</a>
+    <a href="apply.html">Apply for Funding</a>
+    <a href="result.html">Check Result</a>
+    <a href="appeal.html">Submit Appeal</a>
+    <a href="dashboard.html" class="active">Admin Dashboard</a>
+</nav>
+<div class="page-header">
+    <h2>Admin Dashboard</h2>
+    <p>Overview of all applications, band distributions and system statistics.</p>
+</div>
+
+<div class="dash-wrap">
+
+    <!-- KPI ROW -->
+    <div class="kpi-row" id="kpiRow">
+        <div class="kpi-card"><div class="kpi-num" id="kTotal">—</div><div class="kpi-lbl">Total Applications</div></div>
+        <div class="kpi-card"><div class="kpi-num" id="kStudents">—</div><div class="kpi-lbl">Registered Students</div></div>
+        <div class="kpi-card"><div class="kpi-num" id="kAppeals">—</div><div class="kpi-lbl">Appeals Submitted</div></div>
+        <div class="kpi-card"><div class="kpi-num" id="kBand1">—</div><div class="kpi-lbl">Band 1 (Most Vulnerable)</div></div>
+    </div>
+
+    <!-- BAND DISTRIBUTION -->
+    <div class="table-card" style="margin-bottom:32px">
+        <div class="table-header"><h3>Band Distribution</h3></div>
+        <div style="padding:24px;display:grid;grid-template-columns:repeat(5,1fr);gap:12px" id="bandDist">
+            <div style="text-align:center;color:#aaa">Loading...</div>
+        </div>
+    </div>
+
+    <!-- APPLICATIONS TABLE -->
+    <div class="table-card">
+        <div class="table-header">
+            <h3>All Applications</h3>
+            <button class="btn-action btn-green" onclick="loadApplications()" style="font-size:.8em;padding:8px 16px">↺ Refresh</button>
+        </div>
+        <div style="overflow-x:auto">
+            <table id="appTable">
+                <thead>
+                    <tr>
+                        <th>#ID</th><th>Name</th><th>ID Number</th>
+                        <th>Income (KES)</th><th>Region</th><th>School Type</th>
+                        <th>Score</th><th>Band</th><th>Date</th>
+                    </tr>
+                </thead>
+                <tbody id="appBody"><tr><td colspan="9" style="text-align:center;padding:32px;color:#aaa">Loading...</td></tr></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<footer class="site-footer">
+    <div class="footer-bottom-bar">
+        <span>© 2026 Higher Education Loans Board — Republic of Kenya</span>
+        <span>Smart Enterprise System v1.0 | Cyber Titans — Kisii University</span>
+    </div>
+</footer>
+
+<script>
+const API = 'http://127.0.0.1:5000';
+const BAND_COLORS = {1:'#1a7a3c',2:'#2e9e52',3:'#f0a500',4:'#d45f00',5:'#c0392b'};
+
+async function loadStats() {
+    try {
+        const res  = await fetch(`${API}/api/stats`);
+        const json = await res.json();
+        if (!json.success) return;
+        const d = json.data;
+        document.getElementById('kTotal').textContent    = d.total_applications;
+        document.getElementById('kStudents').textContent = d.total_students;
+        document.getElementById('kAppeals').textContent  = d.total_appeals;
+        document.getElementById('kBand1').textContent    = d.band_distribution[1] || 0;
+
+        // Band distribution bars
+        const total = d.total_applications || 1;
+        const dist  = document.getElementById('bandDist');
+        dist.innerHTML = [1,2,3,4,5].map(b => {
+            const count = d.band_distribution[b] || 0;
+            const pct   = ((count / total) * 100).toFixed(1);
+            return `<div style="text-align:center">
+                <div style="font-size:1.6em;font-weight:700;color:${BAND_COLORS[b]}">${count}</div>
+                <div style="font-size:.75em;color:#555;margin:4px 0">Band ${b}</div>
+                <div style="height:6px;background:#eee;border-radius:3px;overflow:hidden">
+                    <div style="height:100%;width:${pct}%;background:${BAND_COLORS[b]};border-radius:3px"></div>
+                </div>
+                <div style="font-size:.72em;color:#aaa;margin-top:4px">${pct}%</div>
+            </div>`;
+        }).join('');
+    } catch(e) {
+        console.error(e);
+    }
+}
+
+async function loadApplications() {
+    try {
+        const res  = await fetch(`${API}/api/applications`);
+        const json = await res.json();
+        if (!json.success) return;
+        const tbody = document.getElementById('appBody');
+        if (!json.data.length) {
+            tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:32px;color:#aaa">No applications yet.</td></tr>';
+            return;
+        }
+        tbody.innerHTML = json.data.map(r => `
+            <tr>
+                <td><a href="result.html?id=${r.id}" style="color:var(--green);font-weight:600">#${r.id}</a></td>
+                <td>${r.full_name||'—'}</td>
+                <td>${r.id_number||'—'}</td>
+                <td>${parseInt(r.household_income||0).toLocaleString()}</td>
+                <td>${r.region||'—'}</td>
+                <td>${r.school_type||'—'}</td>
+                <td>${parseFloat(r.adjusted_score||0).toFixed(1)}</td>
+                <td><span class="band-pill" style="background:${BAND_COLORS[r.assigned_band]}">Band ${r.assigned_band}</span></td>
+                <td>${new Date(r.submitted_at).toLocaleDateString()}</td>
+            </tr>`).join('');
+    } catch(e) {
+        document.getElementById('appBody').innerHTML =
+            '<tr><td colspan="9" style="text-align:center;padding:24px;color:#c0392b">API offline — run python api.py</td></tr>';
+    }
+}
+
+loadStats();
+loadApplications();
+setInterval(() => { loadStats(); loadApplications(); }, 30000);
+</script>
+</body>
+</html>
