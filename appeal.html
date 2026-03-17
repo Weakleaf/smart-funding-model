@@ -4,7 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit Appeal — HELB Smart System</title>
-    <link rel="stylesheet" href="helb.css">
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--green:#1a7a3c;--green-dark:#0f5228;--green-light:#e8f5ee;--gold:#f0a500;--red:#c0392b;--text:#1a1a1a;--text-light:#555;--border:#dde5e0;--bg:#f5f7f5;--white:#ffffff;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);}
+.top-strip{background:var(--green-dark);color:#fff;font-size:.75em;padding:6px 0;text-align:center;}
+header{background:var(--white);border-bottom:3px solid var(--green);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:80px;box-shadow:0 2px 8px rgba(0,0,0,.08);}
+.logo-area{display:flex;align-items:center;gap:16px;}
+.logo-badge{width:56px;height:56px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1.1em;}
+.logo-text h1{font-size:1.3em;font-weight:700;color:var(--green-dark);}
+.logo-text p{font-size:.72em;color:var(--text-light);}
+nav{background:var(--green);padding:0 40px;display:flex;}
+nav a{color:rgba(255,255,255,.88);text-decoration:none;font-size:.85em;font-weight:500;padding:14px 20px;display:block;transition:background .2s;border-bottom:3px solid transparent;}
+nav a:hover,nav a.active{background:var(--green-dark);color:#fff;border-bottom-color:var(--gold);}
+.page-header{background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;padding:32px 40px;}
+.page-header h2{font-size:1.6em;font-weight:700;margin-bottom:6px;}
+.page-header p{opacity:.85;font-size:.9em;}
+.wrap{max-width:900px;margin:40px auto;padding:0 24px 60px;}
+.form-card{background:var(--white);border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.08);overflow:hidden;}
+.form-section{padding:28px 32px;border-bottom:1px solid var(--border);}
+.form-section:last-child{border-bottom:none;}
+.form-section-title{font-size:1em;font-weight:700;color:var(--green-dark);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.form-section-title span{background:var(--green);color:#fff;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8em;font-weight:700;flex-shrink:0;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.form-group{display:flex;flex-direction:column;gap:6px;}
+.form-group.full{grid-column:1/-1;}
+label{font-size:.82em;font-weight:600;color:var(--text-light);}
+input,select,textarea{padding:10px 14px;border:1.5px solid var(--border);border-radius:4px;font-size:.9em;font-family:'Inter',sans-serif;color:var(--text);background:#fff;transition:border-color .2s;}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(26,122,60,.1);}
+.submit-area{padding:24px 32px;background:var(--green-light);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.btn-submit{background:var(--green);color:#fff;border:none;padding:14px 36px;border-radius:4px;font-size:1em;font-weight:700;cursor:pointer;transition:background .2s;}
+.btn-submit:hover{background:var(--green-dark);}
+.btn-submit:disabled{background:#aaa;cursor:not-allowed;}
+.submit-note{font-size:.8em;color:var(--text-light);}
+.error-box{background:#fdf0f0;border-left:4px solid var(--red);padding:14px 18px;border-radius:0 4px 4px 0;color:#7a1a1a;font-size:.88em;margin-top:16px;}
+.site-footer{background:var(--green-dark);color:rgba(255,255,255,.7);padding:20px 40px;}
+.footer-bottom-bar{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;font-size:.78em;flex-wrap:wrap;gap:8px;}
+@media(max-width:700px){.form-grid{grid-template-columns:1fr;}}
+    </style>
 </head>
 <body>
 <div class="top-strip">Official Website of the Higher Education Loans Board (HELB) — Republic of Kenya</div>
