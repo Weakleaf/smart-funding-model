@@ -4,7 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard — HELB Smart System</title>
-    <link rel="stylesheet" href="helb.css">
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--green:#1a7a3c;--green-dark:#0f5228;--green-light:#e8f5ee;--gold:#f0a500;--red:#c0392b;--text:#1a1a1a;--text-light:#555;--border:#dde5e0;--bg:#f5f7f5;--white:#ffffff;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);}
+.top-strip{background:var(--green-dark);color:#fff;font-size:.75em;padding:6px 0;text-align:center;}
+header{background:var(--white);border-bottom:3px solid var(--green);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:80px;box-shadow:0 2px 8px rgba(0,0,0,.08);}
+.logo-area{display:flex;align-items:center;gap:16px;}
+.logo-badge{width:56px;height:56px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1.1em;}
+.logo-text h1{font-size:1.3em;font-weight:700;color:var(--green-dark);}
+.logo-text p{font-size:.72em;color:var(--text-light);}
+nav{background:var(--green);padding:0 40px;display:flex;}
+nav a{color:rgba(255,255,255,.88);text-decoration:none;font-size:.85em;font-weight:500;padding:14px 20px;display:block;transition:background .2s;border-bottom:3px solid transparent;}
+nav a:hover,nav a.active{background:var(--green-dark);color:#fff;border-bottom-color:var(--gold);}
+.page-header{background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;padding:32px 40px;}
+.page-header h2{font-size:1.6em;font-weight:700;margin-bottom:6px;}
+.page-header p{opacity:.85;font-size:.9em;}
+.dash-wrap{max-width:1200px;margin:0 auto;padding:32px 24px 60px;}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px;}
+.kpi-card{background:var(--white);border-radius:8px;padding:24px;box-shadow:0 2px 8px rgba(0,0,0,.07);border-top:4px solid var(--green);}
+.kpi-num{font-size:2.2em;font-weight:700;color:var(--green-dark);}
+.kpi-lbl{font-size:.8em;color:var(--text-light);margin-top:4px;}
+.table-card{background:var(--white);border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden;margin-bottom:32px;}
+.table-header{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.table-header h3{font-size:1em;font-weight:700;color:var(--green-dark);}
+table{width:100%;border-collapse:collapse;}
+th{background:var(--green-light);padding:12px 16px;text-align:left;font-size:.78em;font-weight:700;color:var(--green-dark);letter-spacing:.5px;}
+td{padding:12px 16px;border-bottom:1px solid var(--border);font-size:.85em;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:#f9fdf9;}
+.band-pill{display:inline-block;padding:3px 12px;border-radius:12px;color:#fff;font-size:.75em;font-weight:700;}
+.btn-action{padding:10px 22px;border-radius:4px;font-size:.85em;font-weight:600;cursor:pointer;text-decoration:none;border:none;transition:all .2s;display:inline-block;}
+.btn-green{background:var(--green);color:#fff;}
+.btn-green:hover{background:var(--green-dark);}
+.site-footer{background:var(--green-dark);color:rgba(255,255,255,.7);padding:20px 40px;}
+.footer-bottom-bar{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;font-size:.78em;flex-wrap:wrap;gap:8px;}
+@media(max-width:700px){.kpi-row{grid-template-columns:1fr 1fr;}}
+    </style>
 </head>
 <body>
 <div class="top-strip">HELB Smart System — Admin Portal | Restricted Access</div>
